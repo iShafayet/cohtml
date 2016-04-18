@@ -5,21 +5,39 @@ This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Back
 
 ```
 
+{statement} ::= {indent}*{tag}{ws}{eolc}
+
+{tag} ::= {tag-head}{ws}{tag-tail}[{scope}]
+
+{tag-head} ::= {tag-name}[${tag-id}][(.{tag-class})+]
+
+{tag-name} ::= {identifier}
+
+{tag-id} ::= {identifier}
+
+{tag-class} ::= {identifier}
+
+{tag-tail} ::= ({tag-attribute}[="{tag-attribute-value}"])*[|{inline-text}]
+
+{tag-attribute} ::= {identifier}
+
+{tag-attribute-value} ::= Anything but "
+
+{inline-text} ::= Anything but {eolc}
+
+{identifier} ::= {alphanumeric}+[{alphanumeric}*[-*{alphanumeric}*]]
+
+{alphanumeric} ::= ((A|B|...|Z)*(a|b|...|z)*(0|1|...|9)*)*
+
 {eolc} ::= End of Line Character
 
 {indent} ::= Two white spaces or a tab character. Depending on the first indent encountered in the input
 
+{ws} ::= ({s}*{t}*)*
+
 {s} ::= A Space Character
 
 {t} ::= A Tab Character
-
-{ws} ::= ({s}*{t}*)*
-
-{statement} ::= {indent}*{tag}{eolc}
-
-{tag} ::= {tag-head}{ws}{tag-tail}
-
-{tag-head} ::= {tag-name}|
 
 
 ```
