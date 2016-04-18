@@ -4,6 +4,7 @@ This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Back
 
 
 ```
+{scope} ::= {statement}*
 
 {statement} ::= {indent}*({tag}|{text-node}){ws}{eolc}
 
@@ -17,7 +18,7 @@ This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Back
 
 {tag-class} ::= {identifier}
 
-{tag-tail} ::= ({tag-attribute}[="{tag-attribute-value}"])*[|{inline-text}]
+{tag-tail} ::= ({tag-attribute}[="{tag-attribute-value}"]{ws})*[|{inline-text}]
 
 {tag-attribute} ::= {identifier}
 
@@ -25,13 +26,17 @@ This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Back
 
 {inline-text} ::= Anything but {eolc}
 
-{text-node} ::= `{text-node-value}`
+{text-node} ::= {backtick}{text-node-value}{backtick}
 
-{text-node-value} ::= Anything but `
+{text-node-value} ::= Anything but {backtick}
 
 {identifier} ::= {alphanumeric}+[{alphanumeric}*[-*{alphanumeric}*]]
 
 {alphanumeric} ::= ((A|B|...|Z)*(a|b|...|z)*(0|1|...|9)*)*
+
+{dq} ::= Double Quote Character (")
+
+{backtick} ::= Backtick Character (`)
 
 {eolc} ::= End of Line Character
 
@@ -43,5 +48,7 @@ This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Back
 
 {t} ::= A Tab Character
 
-
 ```
+
+Note: Indent of a child must be one {indent} greater than that of it's parent. I was unable to express this in Context Free Grammer. There is an issue regarding this.
+
