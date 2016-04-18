@@ -18,11 +18,11 @@ This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Back
 
 {tag-class} ::= {identifier}
 
-{tag-tail} ::= ({tag-attribute}[="{tag-attribute-value}"]{ws})*[|{inline-text}]
+{tag-tail} ::= ({tag-attribute}[={dq}{tag-attribute-value}{dq}]{ws})*[|{inline-text}]
 
 {tag-attribute} ::= {identifier}
 
-{tag-attribute-value} ::= Anything but "
+{tag-attribute-value} ::= Anything but {dq}
 
 {inline-text} ::= Anything but {eolc}
 
