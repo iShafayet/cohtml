@@ -4,3 +4,5 @@ This project is under development and in no way is ready for production use. Use
 # cohtml
 cohtml is to html what CoffeeScript is to Javascript
 
+# docs
+[Notes For Developers](docs/dev-notes)
