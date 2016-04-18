@@ -10,11 +10,15 @@ class GenericParser
     @head = 0
     @headStack = []
 
-  pushHead: ->
+  backUp: ->
     @headStack.push @head
     return
 
-  popHead: ->
+  commit: ->
+    @headStack.pop()
+    return
+
+  rollback: ->
     @head = @headStack.pop()
     return
 
@@ -25,7 +29,75 @@ class GenericParser
     @head += 1
     return
 
-  
+  takeIfChar: (char)->
+    if @current() is char
+      @moveForward()
+      return char
+    else
+      return false
+
+  takeIfString: (string)->
+    @backUp()
+    for char in string.split ''
+      unless @takeIfChar char
+        @rollback()
+        return false
+    @commit()
+    return string
+
+  takeIfInCharArray: (charArray)->
+    @backUp()
+    for char in charArray
+      if @takeIfChar char
+        @commit()
+        return char
+    @rollback()
+    return false
+
+  takeIfInStringArray: (stringArray)->
+    @backUp()
+    for string in stringArray
+      if @takeIfString string
+        @commit()
+        return string
+    @rollback()
+    return false
+
+  takeUnlessChar: (char)->
+    unless (cur = @current()) is char
+      @moveForward()
+      return cur
+    return false
+
+  takeUntilChar: (char)->
+    string = ''
+    while string = @takeUnlessChar char
+      'pass'
+    return string
+
+  takeUntilString: (string)->
+    returnString = ''
+    loop
+      @backUp()
+      if @takeIfString string
+        @rollback()
+        return returnString
+      else
+        returnString += @current()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 
