@@ -2,13 +2,13 @@
     "name": "cohtml",
     "version": "0.0.0",
     "description": "cohtml is to html what CoffeeScript is to Javascript.",
-    "main": "runner.js",
+    "main": "index-runner.js",
     "scripts": {
         "test": "mocha --compilers coffee:coffee-script/register"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/iShafayet/meta-engine.git"
+        "url": "https://github.com/iShafayet/cohtml.git"
     },
     "keywords": [
         "html",
