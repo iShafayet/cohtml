@@ -5,7 +5,7 @@ This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Back
 
 ```
 
-{statement} ::= {indent}*{tag}{ws}{eolc}
+{statement} ::= {indent}*({tag}|{text-node}){ws}{eolc}
 
 {tag} ::= {tag-head}{ws}{tag-tail}[{scope}]
 
@@ -24,6 +24,10 @@ This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Back
 {tag-attribute-value} ::= Anything but "
 
 {inline-text} ::= Anything but {eolc}
+
+{text-node} ::= `{text-node-value}`
+
+{text-node-value} ::= Anything but `
 
 {identifier} ::= {alphanumeric}+[{alphanumeric}*[-*{alphanumeric}*]]
 
