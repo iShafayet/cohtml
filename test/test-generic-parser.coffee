@@ -5,7 +5,66 @@
 
 describe 'Generic Parser', ->
 
-  it 'Work In Progress Test', ->
+
+  it 'takeUnlessChar, takeUntilChar, takeUntilString', ->
+
+    input = 'fffff rrrerrrem Something</a>'
+
+    parser = new GenericParser input
+
+    val = parser.takeUnlessChar ' '
+    expect(val).to.equal('f')
+
+    val = parser.takeUnlessChar 'f'
+    expect(val).to.equal(false)
+
+    val = parser.takeUntilChar ' '
+    expect(val).to.equal('ffff')
+
+    val = parser.takeUntilChar ' '
+    expect(val).to.equal('')
+
+    val = parser.takeUntilString 'em'
+    expect(val).to.equal(' rrrerrr')
+
+    val = parser.takeUntilString ' '
+    expect(val).to.equal('em')
+
+    val = parser.takeUntilString '</a>'
+    expect(val).to.equal(' Something')
+
+  it 'takeIfChar, takeIfString, takeIfInCharArray, takeIfInStringArray', ->
+
+    input = '<a>Something</a>'
+
+    parser = new GenericParser input
+
+    val = parser.takeIfChar 'a'
+    expect(val).to.equal(false)
+
+    val = parser.takeIfChar '<'
+    expect(val).to.equal('<')
+
+    val = parser.takeIfString '<'
+    expect(val).to.equal(false)
+
+    val = parser.takeIfString 'a>'
+    expect(val).to.equal('a>')
+
+    val = parser.takeIfInCharArray [ 'n', 'm', 's' ]
+    expect(val).to.equal(false)
+
+    val = parser.takeIfInCharArray [ 'n', 'm', 'S' ]
+    expect(val).to.equal('S')
+
+    val = parser.takeIfInStringArray [ 'omk', 'omw', 'sdw' ]
+    expect(val).to.equal(false)
+
+    val = parser.takeIfInStringArray [ 'omk', 'ome', 'sdw' ]
+    expect(val).to.equal('ome')
+
+
+  it 'backUp, commit, moveForward, rollback', ->
 
     parser = new GenericParser 'asdf'
 
@@ -21,4 +80,6 @@ describe 'Generic Parser', ->
 
     parser.rollback()
     expect(parser.current()).to.equal('s')
+
+
 
