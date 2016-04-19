@@ -85,6 +85,24 @@ class GenericParser
       else
         returnString += @current()
 
+  takeUntilInCharArray: (charArray)->
+    returnString = ''
+    loop
+      if @current() in charArray
+        return returnString
+      else
+        returnString += @current()
+
+  takeUntilInStringArray: (stringArray)->
+    returnString = ''
+    loop
+      @backUp()
+      if @takeIfInStringArray stringArray
+        @rollback()
+        return returnString
+      else
+        returnString += @current()
+
 
 
 
