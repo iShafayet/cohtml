@@ -14,11 +14,11 @@ describe 'Generic Parser', ->
     parser.moveForward()
     expect(parser.head).to.equal(1)
 
-    parser.pushHead()
+    parser.backUp()
 
     parser.moveForward()
     expect(parser.current()).to.equal('d')
 
-    parser.popHead()
+    parser.rollback()
     expect(parser.current()).to.equal('s')
 
