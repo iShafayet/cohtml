@@ -60,6 +60,14 @@ class CohtmlParser extends GenericParser
     else
       @throwError 'Inconsistent Indent.'
 
+  ###
+    Extraction
+  ###
 
+  extractScope: (indentLevel = 0, parentNode = null)->
+    scope = []
+    while node = @extractStatement indentLevel, parentNode
+      scope.push node
+    return scope
 
 @CohtmlParser = CohtmlParser
