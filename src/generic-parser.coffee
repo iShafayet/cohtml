@@ -129,6 +129,19 @@ class GenericParser
         @moveForward()
 
 
+  ###
+    Common Tokens
+  ###
+
+  CommonTokens:
+    unixNewline: '\n'
+    windowsNewline: '\r\n'
+    newline: ['\n', '\r\n']
+    space: ' '
+    tab: '\t'
+    whitespace: [' ', '\t']
+
+
 
 
 
