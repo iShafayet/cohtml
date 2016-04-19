@@ -170,6 +170,12 @@ class GenericParser
     if typeof stringArray is 'string'
       stringArray = [stringArray]
     parser.collectUntilFalse => parser.takeIfInStringArray stringArray
-    return  
+    return
+
+  takeAll: (stringArray)->
+    if typeof stringArray is 'string'
+      stringArray = [stringArray]
+    return parser.collectUntilFalse => parser.takeIfInStringArray stringArray
+
 
 @GenericParser = GenericParser
