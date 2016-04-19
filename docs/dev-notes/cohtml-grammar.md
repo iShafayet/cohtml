@@ -2,11 +2,10 @@
 This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form) and [Extended Backus–Naur Form](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form). Angular braces are replaced with Curly Braces due to the issues with Markdown preview.
 
 
-
 ```
 {scope} ::= {statement}*
 
-{statement} ::= {indent}*({tag}|{text-node}){ws}{eolc}
+{statement} ::= {indent}*({tag}|{text-node}){ws}({eolc}|{eofc})
 
 {tag} ::= {tag-head}{ws}{tag-tail}[{scope}]
 
@@ -39,6 +38,8 @@ This file adheres to the [Backus–Naur Form](https://en.wikipedia.org/wiki/Back
 {backtick} ::= Backtick Character (`)
 
 {eolc} ::= End of Line Character
+
+{eofc} ::= End of File (Pseudo-)Character
 
 {indent} ::= Two white spaces or a tab character. Depending on the first indent encountered in the input
 
