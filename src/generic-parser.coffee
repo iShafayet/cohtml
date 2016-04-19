@@ -37,7 +37,11 @@ class GenericParser
     Utilities
   ###
 
-
+  collectUntilFalse: (fn)->
+    returnString = ''
+    while string = fn()
+      returnString += string
+    return returnString
 
   ###
     Known Length Token Extraction
