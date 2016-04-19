@@ -172,6 +172,11 @@ class GenericParser
     @collectUntilFalse => @takeIfInStringArray stringArray
     return
 
+  take: (stringArray)->
+    if typeof stringArray is 'string'
+      stringArray = [stringArray]
+    return @takeIfInStringArray stringArray
+
   takeAll: (stringArray)->
     if typeof stringArray is 'string'
       stringArray = [stringArray]
