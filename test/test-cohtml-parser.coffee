@@ -12,3 +12,7 @@ describe 'Cohtml Parser', ->
     input = fs.readFileSync './test/sample-cohtml/work-in-progress.cohtml', 'utf8'
 
     parser = new CohtmlParser input
+
+    console.log parser.extractScope()
+
+

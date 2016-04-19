@@ -1,1 +1,6 @@
-example-test
+html lang="en"
+  head
+    title | Cohtml Demo
+  body
+    h1 | Cohtml Demo
+    p | lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
