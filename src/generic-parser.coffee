@@ -10,6 +10,10 @@ class GenericParser
     @head = 0
     @headStack = []
 
+  ###
+    Basic Mechanism
+  ###
+
   backUp: ->
     @headStack.push @head
     return
@@ -28,6 +32,16 @@ class GenericParser
   moveForward: ->
     @head += 1
     return
+
+  ###
+    Utilities
+  ###
+
+
+
+  ###
+    Known Length Token Extraction
+  ###
 
   takeIfChar: (char)->
     if @current() is char
@@ -69,10 +83,14 @@ class GenericParser
       return cur
     return false
 
+  ###
+    Variable Length Token Extraction
+  ###
+
   takeUntilChar: (char)->
     string = ''
-    while string = @takeUnlessChar char
-      'pass'
+    while takenChar = @takeUnlessChar char
+      string += takenChar
     return string
 
   takeUntilString: (string)->
@@ -84,6 +102,7 @@ class GenericParser
         return returnString
       else
         returnString += @current()
+        @moveForward()
 
   takeUntilInCharArray: (charArray)->
     returnString = ''
@@ -92,6 +111,7 @@ class GenericParser
         return returnString
       else
         returnString += @current()
+        @moveForward()
 
   takeUntilInStringArray: (stringArray)->
     returnString = ''
@@ -102,6 +122,7 @@ class GenericParser
         return returnString
       else
         returnString += @current()
+        @moveForward()
 
 
 
