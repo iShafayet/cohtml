@@ -17,6 +17,33 @@ describe 'Generic Parser', ->
     val = parser.collectUntilFalse => parser.takeIfChar 'f'
     expect(val).to.equal('ffff')
 
+  it 'takeUntilInCharArray, takeUntilInStringArray', ->
+
+    input = 'fffffrggggggggq'
+
+    parser = new GenericParser input
+
+    val = parser.takeUntilInCharArray [ 'r', 'q' ]
+    expect(val).to.equal('fffff')
+
+    parser.moveForward()
+
+    val = parser.takeUntilInCharArray [ 'r', 'q' ]
+    expect(val).to.equal('gggggggg')
+
+    input = 'fffkiffkioggggggggqte'
+
+    parser = new GenericParser input
+
+    val = parser.takeUntilInStringArray [ 'kio', 'qte' ]
+    expect(val).to.equal('fffkiff')
+
+    parser.moveForward() for i in [0...3]
+
+    val = parser.takeUntilInStringArray [  'kio', 'qte' ]
+    expect(val).to.equal('gggggggg')
+
+
   it 'takeUnlessChar, takeUntilChar, takeUntilString', ->
 
     input = 'fffff rrrerrrem Something</a>'
