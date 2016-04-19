@@ -29,6 +29,9 @@ class GenericParser
   current: ->
     return @inputArray[@head]
 
+  isEof: ->
+    return @head is @inputArray.length
+
   moveForward: ->
     @head += 1
     return
