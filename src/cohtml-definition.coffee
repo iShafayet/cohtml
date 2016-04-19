@@ -1,8 +1,7 @@
 
 class CohtmlNode
 
-  constructor: (@parent = null, @tag = null, @id = null, @classList = [], @attributeMap = {})->
-    @innerText = null
+  constructor: (@parent = null, @tag = null, @id = null, @classList = [], @attributeMap = {}, @innerText = null)->
     @childrenList = []
     return
 
