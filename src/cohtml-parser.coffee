@@ -22,6 +22,23 @@ class CohtmlParser extends GenericParser
       newline: CohtmlParser.CommonTokens.newline
 
   ###
+    Error Management
+  ###
+
+  throwError: (message)->
+    ex = new Error message
+    ex.name = 'CohtmlParserError'
+    location = (@inputArray[0...@head]).join ''
+    lineCount = @countNewlines location
+    text = """
+           CohtmlParserError: #{message}
+           head: #{@head}
+           line: #{lineCount}
+           """
+    ex.stack = text
+    throw ex
+
+  ###
     Utilities
   ###
 
@@ -42,5 +59,7 @@ class CohtmlParser extends GenericParser
       return true
     else
       @throwError 'Inconsistent Indent.'
+
+
 
 @CohtmlParser = CohtmlParser
