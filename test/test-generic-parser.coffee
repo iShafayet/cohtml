@@ -5,6 +5,17 @@
 
 describe 'Generic Parser', ->
 
+  it 'collectUntilFalse', ->
+
+    input = 'fffff rrrerrrem Something</a>'
+
+    parser = new GenericParser input
+
+    val = parser.takeIfChar 'f'
+    expect(val).to.equal('f')
+
+    val = parser.collectUntilFalse => parser.takeIfChar 'f'
+    expect(val).to.equal('ffff')
 
   it 'takeUnlessChar, takeUntilChar, takeUntilString', ->
 
