@@ -5,7 +5,7 @@
 
 describe 'Generic Parser', ->
 
-  it 'ignore, takeAll, takeAllUntil', ->
+  it 'ignore, take, takeAll, takeAllUntil', ->
 
     input = 'fffffffffffffffffTTTTTTTTTTTTTTTTTTTTTTTTTTcefyvfh4fci46cfh48fc84hcf4f874hc3hhc!hfyuysfhsfdsf'
     
@@ -17,7 +17,10 @@ describe 'Generic Parser', ->
     expect(val).to.equal('TTTTTTTTTTTTTTTTTTTTTTTTTT')
 
     val = parser.takeAllUntil '!'
-    expect(val).to.equal('cefyvfh4fci46cfh48fc84hcf4f874hc3hhc')    
+    expect(val).to.equal('cefyvfh4fci46cfh48fc84hcf4f874hc3hhc')
+
+    val = parser.take '!'
+    expect(val).to.equal('!')
 
   it 'collectUntilFalse', ->
 
