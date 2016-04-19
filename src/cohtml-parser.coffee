@@ -21,4 +21,26 @@ class CohtmlParser extends GenericParser
       backtick: '`'
       newline: CohtmlParser.CommonTokens.newline
 
+  ###
+    Utilities
+  ###
+
+  countNewlines: (string)->
+    lineCount = 0
+    offset = 0
+    while (index = string.indexOf '\n', offset) > -1
+      offset += index + 1
+      lineCount += 1
+    return lineCount
+
+  ignoreWhitespace: ->
+    @ignore @charset['ws']
+
+  ensureIndent: (indentLevel)->
+    indentString = (@indentCharacter for _ in [0...indentLevel]).join ''
+    if indentString is '' or @take indentString
+      return true
+    else
+      @throwError 'Inconsistent Indent.'
+
 @CohtmlParser = CohtmlParser
