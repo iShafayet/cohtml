@@ -83,4 +83,6 @@ class CohtmlParser extends GenericParser
       else
         @throwError 'Expected CohtmlNode or CohtmlTextNode.'
 
+  extractTextNode: (parentNode)->
+
 @CohtmlParser = CohtmlParser
