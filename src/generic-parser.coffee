@@ -162,6 +162,14 @@ class GenericParser
       urlSafeBase64
     }
 
+  ###
+    Common Extraction Methods
+  ###
 
+  ignore: (stringArray)->
+    if typeof stringArray is 'string'
+      stringArray = [stringArray]
+    parser.collectUntilFalse => parser.takeIfInStringArray stringArray
+    return  
 
 @GenericParser = GenericParser
