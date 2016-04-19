@@ -128,46 +128,39 @@ class GenericParser
         returnString += @current()
         @moveForward()
 
-
   ###
     Common Tokens
   ###
 
-  CommonTokens:
-    unixNewline: '\n'
-    windowsNewline: '\r\n'
-    newline: ['\n', '\r\n']
-    space: ' '
-    tab: '\t'
-    whitespace: [' ', '\t']
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
+  @CommonTokens: do ->
+    unixNewline = '\n'
+    windowsNewline = '\r\n'
+    newline = ['\n', '\r\n']
+    space = ' '
+    tab = '\t'
+    whitespace = [' ', '\t']
+    alphabetSmall = 'abcdefghijklmnopqrstuvwzyz'.split ''
+    alphabetCapital = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split ''
+    alpha = [].concat alphabetCapital, alphabetSmall
+    numeric = '0123456789'.split ''
+    alphanumeric = [].concat alpha, numeric
+    base64 = [].concat alphanumeric, [ '+', '/' ] ## NOTE: RFC 4648 Spec
+    urlSafeBase64 = [].concat alphanumeric, [ '-', '_' ] 
+    return {
+      unixNewline
+      windowsNewline
+      newline
+      space
+      tab
+      whitespace
+      alphabetSmall
+      alphabetCapital
+      alpha
+      numeric
+      alphanumeric
+      base64
+      urlSafeBase64
+    }
 
 
 
