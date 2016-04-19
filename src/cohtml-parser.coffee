@@ -70,4 +70,17 @@ class CohtmlParser extends GenericParser
       scope.push node
     return scope
 
+  extractStatement: (indentLevel, parentNode)->
+    @ensureIndent indentLevel
+    if node = @extractNode indentLevel, parentNode
+      return node
+    else if node = @extractTextNode parentNode
+      return node
+    else
+      @ignoreWhitespace()
+      if @isEof()
+        return false
+      else
+        @throwError 'Expected CohtmlNode or CohtmlTextNode.'
+
 @CohtmlParser = CohtmlParser
