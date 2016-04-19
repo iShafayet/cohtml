@@ -85,4 +85,59 @@ class CohtmlParser extends GenericParser
 
   extractTextNode: (parentNode)->
 
+  extractNode: (indentLevel, parentNode)->
+    tag = @takeAll @charset['tag']
+    return false unless tag
+
+    id = null
+    classList = []
+    while shorthand = @take [ '$', '.' ]
+      if shorthand is '$'
+        unless id = @takeAll @charset['id']
+          @throwError 'Expected ID after $ sign'
+      else
+        if className = @takeAll @charset['class']
+          classList.push className
+        else
+          @throwError 'Expected ClassName after $ sign'
+
+    @ignoreWhitespace()    
+
+    attributeMap = {}
+    while attribute = @takeAll @charset['attribute']
+      @ignoreWhitespace()
+      
+      if @take @charset['equal']
+
+        @ignoreWhitespace()
+        if @take @charset['dquote']
+          value = @takeAllUntil @charset['dquote']
+          attributeMap[attribute] = value
+          @take @charset['dquote']
+          if value.length is 0
+            @throwError 'Value of an attribute can not be empty'
+        else
+          @throwError 'Expected Double Quote after = sign'
+
+      else
+        attributeMap[attribute] = null
+
+    @ignoreWhitespace()
+
+    innerText = null
+    if @take @charset['pipe']
+      innerText = @takeAllUntil @charset['newline']
+      @ignoreWhitespace()
+    else 
+      if @take @charset['backtick']
+        innerText = @takeAllUntil @charset['backtick']
+        @ignoreWhitespace()
+
+    node = new CohtmlNode parentNode, tag, id, classList, attributeMap, innerText
+
+    @take @charset['newline']
+
+    childrenList = @extractScope (indentLevel + 1), node
+
+
 @CohtmlParser = CohtmlParser
