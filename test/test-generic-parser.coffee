@@ -5,6 +5,20 @@
 
 describe 'Generic Parser', ->
 
+  it 'ignore, takeAll, takeAllUntil', ->
+
+    input = 'fffffffffffffffffTTTTTTTTTTTTTTTTTTTTTTTTTTcefyvfh4fci46cfh48fc84hcf4f874hc3hhc!hfyuysfhsfdsf'
+    
+    parser = new GenericParser input
+
+    parser.ignore [ 'f', 'g' ]
+
+    val = parser.takeAll 'T'
+    expect(val).to.equal('TTTTTTTTTTTTTTTTTTTTTTTTTT')
+
+    val = parser.takeAllUntil '!'
+    expect(val).to.equal('cefyvfh4fci46cfh48fc84hcf4f874hc3hhc')    
+
   it 'collectUntilFalse', ->
 
     input = 'fffff rrrerrrem Something</a>'
