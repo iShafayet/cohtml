@@ -1,7 +1,8 @@
 
 class Html5Node
 
-  constructor: (@parent = null, @tag = null, @attributeMap = {}, @innerText = null, @childrenList = [])->
+  constructor: (@parent = null, @tag = null, @attributeMap = {}, @innerText = null)->
+  	@childrenList = []
   	@isSelfClosing = false
   	@isNonClosing = false
     return
