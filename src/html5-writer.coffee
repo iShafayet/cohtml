@@ -8,9 +8,11 @@ class Html5Writer
       indentCharacter
     } = options
 
-    @indentCharacter = indentCharacter or '\t'
+    @indentCharacter = indentCharacter or '  '
 
-  write: (node)->
+  write: (node, indentLevel = 0)->
+
+    padding = (@indentCharacter for _ in [0...indentLevel]).join ''
 
     if node instanceof Html5Node
 
@@ -19,24 +21,46 @@ class Html5Writer
       for attribute, value of node.attributeMap
         signature += ' ' + attribute
         if value
-          signature += ' = "' + value + '"'
+          signature += '="' + value + '"'
+
+      if node.isNonClosing
+        html = '<' + signature + '>'
+        if node.childrenList.length > 0
+          for child in node.childrenList
+            html += @write child, (indentLevel + 0)
+        return html
 
       if node.isSelfClosing
         html = '<' + signature + ' />'
-      else if node.isNonClosing
-        html = '<' + signature + '>'
       else
         html = '<' + signature + '>'
 
         if node.childrenList.length > 0
           for child in node.childrenList
-            html += @write child
+            html += @write child, (indentLevel + 1)
         else
           if node.innerText
             html += node.innerText
 
-        html += '</' + tag + '>'
+        ## padding insertion at the closing tag
+        if node.childrenList.length is 0
 
+          if node.innerText and (node.innerText.indexOf '\n') > -1
+            if (node.innerText.lastIndexOf '\n') is node.innerText.length - 1
+              html += padding + '</' + tag + '>'
+            else
+              html += '\n' + padding + '</' + tag + '>'
+          else
+            html += '</' + tag + '>'
+
+        else
+
+          if node.childrenList.length is 1 and node.childrenList[0] instanceof Html5TextNode
+            html += '</' + tag + '>'
+          else
+            html += '\n' + padding + '</' + tag + '>'
+
+      html = '\n' + padding + html
       return html
 
     else if node instanceof Html5TextNode
