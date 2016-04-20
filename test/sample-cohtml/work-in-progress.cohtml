@@ -6,3 +6,23 @@ html lang="en"
     h1 | Cohtml Demo
     p | lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
     div$myId.class1.class2.class4
+    div.class$id$duplicateId `line1
+    line2
+    line3
+`
+    div.class1B
+      `My name`
+      ` is `
+      b
+        ` Dan.`
+
+    
+    div.class2B
+      `Test`
+      b | aaa
+    div.class3B
+
+
+
+
+

@@ -13,6 +13,8 @@ describe 'Cohtml Parser', ->
 
     parser = new CohtmlParser input
 
-    console.log parser.extractScope()
+    scope = parser.extractScope()
+
+    console.log (require 'util').inspect scope, {depth:50, colors: true}
 
 
