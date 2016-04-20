@@ -28,12 +28,29 @@ class CohtmlParser extends GenericParser
   throwError: (message)->
     ex = new Error message
     ex.name = 'CohtmlParserError'
+
+    inputString = (@inputArray.join '')
+
     location = (@inputArray[0...@head]).join ''
-    lineCount = @countNewlines location
+
+    lineNumber = 1 + @countNewlines location
+    
+    offset = location.lastIndexOf '\n'
+    index = inputString.indexOf '\n', (offset+1)
+    line = (@inputArray[offset+1...index]).join ''
+    line = line.replace /\s/g, '~'
+
+    charNumber = @head - offset - 1
+
+    nearPointer = (if charNumber is 0 then '' else ((' ' for _ in [0...charNumber-1]).join '')) + '^'
+
     text = """
            CohtmlParserError: #{message}
            head: #{@head}
-           line: #{lineCount}
+           line: #{lineNumber}
+           char: #{charNumber}
+           near: <#{line}>
+                  #{nearPointer}
            """
     ex.stack = text
     throw ex
