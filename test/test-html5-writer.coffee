@@ -7,6 +7,8 @@
 
 { Html5Writer } = require './../src/html5-writer'
 
+{ Seetoken } =  require 'seetoken'
+
 fs = require 'fs'
 
 describe 'Html5 Writer', ->
@@ -23,7 +25,14 @@ describe 'Html5 Writer', ->
 
     html5Scope = converter.convert scope[0]
 
+    # console.log (require 'util').inspect html5Scope, {depth:50, colors: true}
+
     writer = new Html5Writer
 
-    console.log writer.write html5Scope
+    html5 = writer.write html5Scope
+
+    console.log html5
+
+    # console.log Seetoken.tokenize html5, { color: true }
+
 
