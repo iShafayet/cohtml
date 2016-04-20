@@ -1,7 +1,7 @@
 
 { CohtmlNode, CohtmlTextNode } = require './cohtml-definition'
 
-{ Html5Node, Html5TextNode } = require './html5-definition'
+{ Html5Node, Html5TextNode, nonClosingHtml5TagList, selfClosingHtml5TagList } = require './html5-definition'
 
 class CohtmlToHtml5Converter
 
@@ -26,6 +26,12 @@ class CohtmlToHtml5Converter
 
       currentHtml5Node = new Html5Node parentHtml5Node, node.tag, attributeMap, node.innerText
 
+      if currentHtml5Node.tag in nonClosingHtml5TagList
+        currentHtml5Node.isNonClosing = true
+
+      if currentHtml5Node.tag in selfClosingHtml5TagList
+        currentHtml5Node.isSelfClosing = true
+
     else if node instanceof CohtmlTextNode
       currentHtml5Node = new Html5Node parentHtml5Node, node.innerText
 
@@ -35,9 +41,10 @@ class CohtmlToHtml5Converter
     if parentHtml5Node
       parentHtml5Node.childrenList.push currentHtml5Node
 
-    for childNode in node.childrenList
-      childHtml5Node = @convert childNode, currentHtml5Node
+    if node.childrenList
+      for childNode in node.childrenList
+        childHtml5Node = @convert childNode, currentHtml5Node
 
     return currentHtml5Node
 
-@CohtmlToHtmlConverter = CohtmlToHtmlConverter
+@CohtmlToHtml5Converter = CohtmlToHtml5Converter
