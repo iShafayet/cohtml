@@ -59,8 +59,6 @@ class CohtmlParser extends GenericParser
     Utilities
   ###
 
-
-
   countNewlines: (string)->
     lineCount = 0
     offset = 0
@@ -72,9 +70,16 @@ class CohtmlParser extends GenericParser
   ignoreWhitespace: ->
     @ignore @charset['ws']
 
-
-
-
+  ignoreBlankLine: ->
+    @backUp()
+    line = @takeAll @charset['ws']
+    end = @takeAll @charset['newline']
+    if end.length is 0
+      @rollback()
+      return false
+    else
+      @commit()
+      return true
 
   getIndentLevel: ->
     @backUp()
@@ -94,7 +99,7 @@ class CohtmlParser extends GenericParser
 
   extractStatement: (indentLevel, parentNode)->
 
-    
+    'pass' while @ignoreBlankLine()
 
     foundIndentLevel = @getIndentLevel()
 

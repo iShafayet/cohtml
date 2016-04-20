@@ -1,34 +1,35 @@
 {
-    "name": "cohtml",
-    "version": "0.0.0",
-    "description": "cohtml is to html what CoffeeScript is to Javascript.",
-    "main": "index-runner.js",
-    "scripts": {
-        "test": "mocha --compilers coffee:coffee-script/register"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/iShafayet/cohtml.git"
-    },
-    "keywords": [
-        "html",
-        "preprocessor",
-        "language",
-        "utility",
-        "directive"
-    ],
-    "author": "Sayem Shafayet <ishafayet@gmail.com> (http://ishafayet.me/)",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/iShafayet/cohtml/issues"
-    },
-    "homepage": "https://github.com/iShafayet/cohtml",
-    "dependencies": {
-        "coffee-script": "^1.10.0"
-    },
-    "devDependencies": {
-        "chai": "^3.3.0",
-        "mocha": "^2.3.3"
-    },
-    "private": false
+  "name": "cohtml",
+  "version": "0.0.0",
+  "description": "cohtml is to html what CoffeeScript is to Javascript.",
+  "main": "index-runner.js",
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iShafayet/cohtml.git"
+  },
+  "keywords": [
+    "html",
+    "preprocessor",
+    "language",
+    "utility",
+    "directive"
+  ],
+  "author": "Sayem Shafayet <ishafayet@gmail.com> (http://ishafayet.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iShafayet/cohtml/issues"
+  },
+  "homepage": "https://github.com/iShafayet/cohtml",
+  "dependencies": {
+    "coffee-script": "^1.10.0"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "seetoken": "0.0.0"
+  },
+  "private": false
 }
