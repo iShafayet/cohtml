@@ -10,7 +10,7 @@ class CohtmlParser extends GenericParser
     { indentCharacter } = optionMap
     @indentCharacter = indentCharacter or '  '
     @charset = 
-      tag: CohtmlParser.CommonTokens.urlSafeBase64
+      tag: [].concat ['!'], CohtmlParser.CommonTokens.urlSafeBase64
       id: CohtmlParser.CommonTokens.urlSafeBase64
       class: CohtmlParser.CommonTokens.urlSafeBase64
       attribute: CohtmlParser.CommonTokens.urlSafeBase64
