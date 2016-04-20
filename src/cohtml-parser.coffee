@@ -38,7 +38,7 @@ class CohtmlParser extends GenericParser
     offset = location.lastIndexOf '\n'
     index = inputString.indexOf '\n', (offset+1)
     line = (@inputArray[offset+1...index]).join ''
-    line = line.replace /\s/g, '~'
+    # line = line.replace /\s/g, '~'
 
     charNumber = @head - offset - 1
 
@@ -46,7 +46,7 @@ class CohtmlParser extends GenericParser
 
     text = """
            CohtmlParserError: #{message}
-           head: #{@head}
+           head: #{@head} (#{@current()})
            line: #{lineNumber}
            char: #{charNumber}
            near: <#{line}>
@@ -59,6 +59,8 @@ class CohtmlParser extends GenericParser
     Utilities
   ###
 
+
+
   countNewlines: (string)->
     lineCount = 0
     offset = 0
@@ -69,6 +71,10 @@ class CohtmlParser extends GenericParser
 
   ignoreWhitespace: ->
     @ignore @charset['ws']
+
+
+
+
 
   getIndentLevel: ->
     @backUp()
@@ -87,13 +93,16 @@ class CohtmlParser extends GenericParser
     return scope
 
   extractStatement: (indentLevel, parentNode)->
+
+    
+
     foundIndentLevel = @getIndentLevel()
 
     if foundIndentLevel is indentLevel
       @takeAll @indentCharacter
       if node = @extractNode indentLevel, parentNode
         return node
-      else if node = @extractTextNode parentNode
+      else if node = @extractTextNode indentLevel, parentNode
         return node
       else
         if @isEof()
@@ -103,7 +112,26 @@ class CohtmlParser extends GenericParser
     else
       return false
 
-  extractTextNode: (parentNode)->
+  extractTextNode: (indentLevel, parentNode)->
+    if @take @charset['backtick']
+      innerText = @takeAllUntil @charset['backtick']
+      @take @charset['backtick']
+      @ignoreWhitespace()
+
+      node = new CohtmlTextNode parentNode, innerText
+
+      @take @charset['newline']
+
+      @backUp()
+      childrenList = @extractScope (indentLevel + 1), node
+      if childrenList.length isnt 0
+        @rollback()
+        return @throwError 'CohtmlTextNode can not contain children'
+      @commit()
+
+      return node
+    else
+      return false
 
   extractNode: (indentLevel, parentNode)->
     tag = @takeAll @charset['tag']
@@ -158,7 +186,7 @@ class CohtmlParser extends GenericParser
 
     @take @charset['newline']
 
-    node.childrenList = @extractScope (indentLevel + 1), node    
+    node.childrenList = @extractScope (indentLevel + 1), node
 
     return node
 
