@@ -193,7 +193,12 @@ class CohtmlParser extends GenericParser
 
     @take @charset['newline']
 
+    @backUp()
     node.childrenList = @extractScope (indentLevel + 1), node
+    if node.innerText and node.childrenList.length > 0
+      @rollback()
+      @throwError 'A node may not have both children and inner text'
+    @commit()
 
     return node
 
