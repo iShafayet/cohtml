@@ -33,7 +33,7 @@ class CohtmlToHtml5Converter
         currentHtml5Node.isSelfClosing = true
 
     else if node instanceof CohtmlTextNode
-      currentHtml5Node = new Html5Node parentHtml5Node, node.innerText
+      currentHtml5Node = new Html5TextNode parentHtml5Node, node.innerText
 
     else
       throw new Error 'Unknown type of node provided.'
