@@ -1,6 +1,7 @@
 html lang="en"
   head
     title | Cohtml Demo
+    link rel="stylesheet" href="local.css"
   body
     h1 | Cohtml Demo
     p | lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
