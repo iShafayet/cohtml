@@ -1,7 +1,7 @@
 
-@selfClosingHtml5TagList = ['area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr']
+@selfClosingHtml5TagList = [ 'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr' ]
 
-@nonClosingHtml5TagList = ['!doctype']
+@nonClosingHtml5TagList = [ '!doctype' ]
 
 class Html5Node
 
@@ -19,8 +19,3 @@ class Html5TextNode
 @Html5Node = Html5Node
 @Html5TextNode = Html5TextNode
 
-
-
-
-
-  

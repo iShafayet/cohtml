@@ -17,4 +17,3 @@ describe 'Cohtml Parser', ->
 
     console.log (require 'util').inspect scope, {depth:50, colors: true}
 
-

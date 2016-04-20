@@ -195,5 +195,4 @@ class CohtmlParser extends GenericParser
 
     return node
 
-
 @CohtmlParser = CohtmlParser

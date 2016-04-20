@@ -136,5 +136,3 @@ describe 'Generic Parser', ->
     parser.rollback()
     expect(parser.current()).to.equal('s')
 
-
-

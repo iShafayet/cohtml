@@ -23,4 +23,3 @@ describe 'Cohtml To Html5 Converter', ->
 
     console.log (require 'util').inspect html5Scope, {depth:50, colors: true}
 
-

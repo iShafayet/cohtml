@@ -190,7 +190,4 @@ class GenericParser
       stringArray = [stringArray]
     return @takeUntilInStringArray stringArray
 
-
-
-
 @GenericParser = GenericParser

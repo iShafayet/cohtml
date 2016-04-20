@@ -13,8 +13,3 @@ class CohtmlTextNode
 @CohtmlNode = CohtmlNode
 @CohtmlTextNode = CohtmlTextNode
 
-
-
-
-
-  
