@@ -70,12 +70,11 @@ class CohtmlParser extends GenericParser
   ignoreWhitespace: ->
     @ignore @charset['ws']
 
-  ensureIndent: (indentLevel)->
-    indentString = (@indentCharacter for _ in [0...indentLevel]).join ''
-    if indentString is '' or @take indentString
-      return true
-    else
-      @throwError 'Inconsistent Indent.'
+  getIndentLevel: ->
+    @backUp()
+    foundIndentLevel = (@takeAll @indentCharacter).length / @indentCharacter.length
+    @rollback()
+    return foundIndentLevel
 
   ###
     Extraction
@@ -88,17 +87,21 @@ class CohtmlParser extends GenericParser
     return scope
 
   extractStatement: (indentLevel, parentNode)->
-    @ensureIndent indentLevel
-    if node = @extractNode indentLevel, parentNode
-      return node
-    else if node = @extractTextNode parentNode
-      return node
-    else
-      @ignoreWhitespace()
-      if @isEof()
-        return false
+    foundIndentLevel = @getIndentLevel()
+
+    if foundIndentLevel is indentLevel
+      @takeAll @indentCharacter
+      if node = @extractNode indentLevel, parentNode
+        return node
+      else if node = @extractTextNode parentNode
+        return node
       else
-        @throwError 'Expected CohtmlNode or CohtmlTextNode.'
+        if @isEof()
+          return false
+        else
+          @throwError 'Expected CohtmlNode or CohtmlTextNode.'
+    else
+      return false
 
   extractTextNode: (parentNode)->
 
@@ -138,23 +141,26 @@ class CohtmlParser extends GenericParser
 
       else
         attributeMap[attribute] = null
+      @ignoreWhitespace()
 
     @ignoreWhitespace()
 
     innerText = null
     if @take @charset['pipe']
       innerText = @takeAllUntil @charset['newline']
-      @ignoreWhitespace()
     else 
       if @take @charset['backtick']
         innerText = @takeAllUntil @charset['backtick']
+        @take @charset['backtick']
         @ignoreWhitespace()
 
     node = new CohtmlNode parentNode, tag, id, classList, attributeMap, innerText
 
     @take @charset['newline']
 
-    childrenList = @extractScope (indentLevel + 1), node
+    node.childrenList = @extractScope (indentLevel + 1), node    
+
+    return node
 
 
 @CohtmlParser = CohtmlParser
