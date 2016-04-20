@@ -180,6 +180,8 @@ class CohtmlParser extends GenericParser
 
     innerText = null
     if @take @charset['pipe']
+      unless @take @charset['ws']
+        @throwError 'Expected one single whitespace after pipe (|)'
       innerText = @takeAllUntil @charset['newline']
     else 
       if @take @charset['backtick']
