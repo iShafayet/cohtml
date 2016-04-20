@@ -5,3 +5,4 @@ html lang="en"
   body
     h1 | Cohtml Demo
     p | lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+    div$myId.class1.class2.class4
