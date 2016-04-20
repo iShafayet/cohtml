@@ -115,6 +115,8 @@ class CohtmlParser extends GenericParser
         else
           @throwError 'Expected CohtmlNode or CohtmlTextNode.'
     else
+      if foundIndentLevel > indentLevel
+        @throwError 'Unexpected indentation. Expected ' + indentLevel + ' indentations got ' + foundIndentLevel
       return false
 
   extractTextNode: (indentLevel, parentNode)->
