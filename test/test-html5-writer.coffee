@@ -5,11 +5,13 @@
 
 { CohtmlToHtml5Converter } = require './../src/cohtml-to-html5-converter'
 
+{ Html5Writer } = require './../src/html5-writer'
+
 fs = require 'fs'
 
-describe 'Cohtml To Html5 Converter', ->
+describe 'Html5 Writer', ->
 
-  it 'Work in progress', ->
+  it.only 'Work in progress', ->
 
     input = fs.readFileSync './test/sample-cohtml/work-in-progress.cohtml', 'utf8'
 
@@ -21,5 +23,7 @@ describe 'Cohtml To Html5 Converter', ->
 
     html5Scope = converter.convert scope[0]
 
-    console.log (require 'util').inspect html5Scope, {depth:50, colors: true}
+    writer = new Html5Writer
+
+    console.log writer.write html5Scope
 
