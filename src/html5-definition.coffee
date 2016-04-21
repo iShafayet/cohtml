@@ -16,6 +16,11 @@ class Html5TextNode
   constructor: (@parent = null, @innerText = null)->
     return
 
+class Html5CommentNode
+
+  constructor: (@parent = null, @innerText = null)->
+    return
+
 @Html5Node = Html5Node
 @Html5TextNode = Html5TextNode
-
+@Html5CommentNode = Html5CommentNode
