@@ -1,7 +1,7 @@
 
 { GenericParser } = require './generic-parser'
 
-{ CohtmlNode, CohtmlTextNode } = require './cohtml-definition'
+{ CohtmlNode, CohtmlTextNode, CohtmlCommentNode } = require './cohtml-definition'
 
 class CohtmlParser extends GenericParser
 
@@ -19,6 +19,7 @@ class CohtmlParser extends GenericParser
       dquote: '"'
       pipe: '|'
       backtick: '`'
+      blockComment: '###'
       newline: CohtmlParser.CommonTokens.newline
 
   ###
@@ -109,6 +110,8 @@ class CohtmlParser extends GenericParser
         return node
       else if node = @extractTextNode indentLevel, parentNode
         return node
+      else if node = @extractBlockCommentNode indentLevel, parentNode
+        return node
       else
         if @isEof()
           return false
@@ -117,6 +120,27 @@ class CohtmlParser extends GenericParser
     else
       if foundIndentLevel > indentLevel
         @throwError 'Unexpected indentation. Expected ' + indentLevel + ' indentations got ' + foundIndentLevel
+      return false
+
+  extractBlockCommentNode: (indentLevel, parentNode)->
+    if @take @charset['blockComment']
+      innerText = @takeAllUntil @charset['blockComment']
+      @take @charset['blockComment']
+      @ignoreWhitespace()
+
+      node = new CohtmlCommentNode parentNode, innerText
+
+      @take @charset['newline']
+
+      @backUp()
+      childrenList = @extractScope (indentLevel + 1), node
+      if childrenList.length isnt 0
+        @rollback()
+        return @throwError 'CohtmlCommentNode can not contain children'
+      @commit()
+
+      return node
+    else
       return false
 
   extractTextNode: (indentLevel, parentNode)->

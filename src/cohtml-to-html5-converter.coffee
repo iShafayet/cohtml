@@ -1,7 +1,7 @@
 
-{ CohtmlNode, CohtmlTextNode } = require './cohtml-definition'
+{ CohtmlNode, CohtmlTextNode, CohtmlCommentNode } = require './cohtml-definition'
 
-{ Html5Node, Html5TextNode, nonClosingHtml5TagList, selfClosingHtml5TagList } = require './html5-definition'
+{ Html5Node, Html5TextNode, Html5CommentNode, nonClosingHtml5TagList, selfClosingHtml5TagList } = require './html5-definition'
 
 class CohtmlToHtml5Converter
 
@@ -41,6 +41,9 @@ class CohtmlToHtml5Converter
 
     else if node instanceof CohtmlTextNode
       currentHtml5Node = new Html5TextNode parentHtml5Node, node.innerText
+
+    else if node instanceof CohtmlCommentNode
+      currentHtml5Node = new Html5CommentNode parentHtml5Node, node.innerText
 
     else
       throw new Error 'Unknown type of node provided.'

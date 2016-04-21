@@ -23,6 +23,12 @@ html lang="en"
       `Test`
       b | aaa
     div.class3B
+    ### 
+      this is a block comment
+      line no. 1
+      line no. 2
+###
+    div.f1
 
 
 
