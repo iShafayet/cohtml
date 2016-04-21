@@ -13,7 +13,7 @@ class Html5Node
 
 class Html5TextNode
 
-  constructor: (@parent = null, @innerText = null)->
+  constructor: (@parent = null, @innerText = null, @preserveWhitespaceAndNewlines = false)->
     return
 
 class Html5CommentNode

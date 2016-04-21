@@ -19,6 +19,7 @@ class CohtmlParser extends GenericParser
       dquote: '"'
       pipe: '|'
       backtick: '`'
+      blockTextNode: '```'
       blockComment: '###'
       singleLineComment: '#'
       newline: CohtmlParser.CommonTokens.newline
@@ -115,6 +116,8 @@ class CohtmlParser extends GenericParser
       @takeAll @indentCharacter
       if node = @extractNode indentLevel, parentNode
         return node
+      else if node = @extractBlockTextNode indentLevel, parentNode
+        return node
       else if node = @extractTextNode indentLevel, parentNode
         return node
       else if node = @extractBlockCommentNode indentLevel, parentNode
@@ -165,6 +168,28 @@ class CohtmlParser extends GenericParser
       if childrenList.length isnt 0
         @rollback()
         return @throwError 'CohtmlCommentNode can not contain children'
+      @commit()
+
+      return node
+    else
+      return false
+
+  extractBlockTextNode: (indentLevel, parentNode)->
+    if @take @charset['blockTextNode']
+      innerText = @takeAllUntil @charset['blockTextNode']
+      @take @charset['blockTextNode']
+      @ignoreWhitespace()
+
+      node = new CohtmlTextNode parentNode, innerText
+      node.preserveWhitespaceAndNewlines = true
+
+      @take @charset['newline']
+
+      @backUp()
+      childrenList = @extractScope (indentLevel + 1), node
+      if childrenList.length isnt 0
+        @rollback()
+        return @throwError 'CohtmlTextNode can not contain children'
       @commit()
 
       return node

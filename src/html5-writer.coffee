@@ -53,7 +53,14 @@ class Html5Writer
 
     else if node instanceof Html5TextNode
 
-      return node.innerText
+      innerText = node.innerText
+      if node.preserveWhitespaceAndNewlines
+        innerText = innerText.replace /\r\n/g, '<br>'
+        innerText = innerText.replace /\n/g, '<br>'
+        innerText = innerText.replace /[ ]/g, '&nbsp;'
+
+        
+      return innerText
 
     else if node instanceof Html5CommentNode
 

@@ -40,7 +40,7 @@ class CohtmlToHtml5Converter
         currentHtml5Node.isSelfClosing = true
 
     else if node instanceof CohtmlTextNode
-      currentHtml5Node = new Html5TextNode parentHtml5Node, node.innerText
+      currentHtml5Node = new Html5TextNode parentHtml5Node, node.innerText, node.preserveWhitespaceAndNewlines
 
     else if node instanceof CohtmlCommentNode
       currentHtml5Node = new Html5CommentNode parentHtml5Node, node.innerText

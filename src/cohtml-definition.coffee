@@ -8,6 +8,7 @@ class CohtmlNode
 class CohtmlTextNode
 
   constructor: (@parent = null, @innerText = null)->
+    @preserveWhitespaceAndNewlines = false
     return
 
 class CohtmlCommentNode
