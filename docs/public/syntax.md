@@ -42,19 +42,9 @@ html lang="en"
 **Rules**
 
 * attributes are written exactly like in html 
-* There is a shorthand for IDs. Anything after a dollar ($) sign until a space is considered an ID.
-* There is a shorthand for Classes. Anything after a dot (.) sign until a space is considered a class. Multiple classes are supported
-
-**HTML**
-```html
-<div></div>
-<div id="myId"></div>
-<div class="myclass"></div>
-<div class="myclass1 myclass2" id="myId"></div>
-<div class="myclass1 myclass2 myclass3"></div>
-<div style="color: red"></div>
-<div id="myId" class="myclass1 myclass2" style="color: red"></div>
-```
+* There is a shorthand for IDs. Anything after a dollar (`$`) sign until a space or dot is considered an ID.
+* There is a shorthand for Classes. Anything after a dot (`.`) sign until a space or dot or dollar sign is considered a class. Multiple classes are supported.
+* If using both the shorthand and class attribute, the resulting value will be concatenated.
 
 **Cohtml**
 ```
@@ -65,17 +55,30 @@ div.myclass1.myclass2$myId
 div.myclass1.myclass2.myclass3
 div style="color:red"
 div$myId.myclass1.myclass2 style="color:red"
+div.myclass1 class="myclass2"
 ```
 
+**HTML**
+```html
+<div></div>
+<div id="myId"></div>
+<div class="myclass"></div>
+<div class="myclass1 myclass2" id="myId"></div>
+<div class="myclass1 myclass2 myclass3"></div>
+<div style="color: red"></div>
+<div id="myId" class="myclass1 myclass2" style="color: red"></div>
+<div class="myclass2 myclass1"></div>
+```
 
 ### Inner Text
 
 **Rules**
 
-* Anything after a tag and a pipe (|) and a single space sign is considered innertext. Pipe denoted inner texts are single line. Note that the single space after the pipe sign is required and does not appear in generated html.
-* Multiline inner texts can be inserted using backticks.
+* Anything after a tag and a pipe (`|`) and a single space sign is considered innertext. Pipe denoted inner text is a single line inner text. Note that the single space after the pipe sign is required and does not appear in generated html.
+* Multiline inner texts can be inserted using backticks (`\``).
 * Standalone inner texts using backticks is supported.
-* Standalone triple backticks can be used to insert inner text that preserve newline and whitespace.
+* Standalone triple backticks (`\`\`\``) can be used to insert inner text that preserve newline and whitespace.
+* Note that a tag can not contain both inner children and inline inner text. Use the standalone inner text instead.
 
 **Cohtml**
 ```
