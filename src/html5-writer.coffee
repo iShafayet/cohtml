@@ -17,7 +17,7 @@ class Html5Writer
       returnScope += returnNode
     return returnScope
 
-  writeNode: (node, indentLevel = 0)->
+  writeNodePretty: (node, indentLevel = 0)->
 
     padding = (@indentCharacter for _ in [0...indentLevel]).join ''
 
