@@ -9,11 +9,13 @@
 
 { Seetoken } =  require 'seetoken'
 
+validateHtml5 = require 'html-validator'
+
 fs = require 'fs'
 
-describe 'Html5 Writer', ->
+describe.only 'Html5 Writer', ->
 
-  it.only 'Work in progress', ->
+  write = ->
 
     input = fs.readFileSync './test/sample-cohtml/work-in-progress.cohtml', 'utf8'
 
@@ -31,8 +33,27 @@ describe 'Html5 Writer', ->
 
     html5 = writer.writeScope html5Scope
 
+    return html5
+
+  it 'Work in progress', ->
+
+    html5 = write()
+
     console.log html5
 
-    # console.log Seetoken.tokenize html5, { color: true }
+  it 'Validation', (done)->
+
+    html5 = write()
+
+    validateHtml5 { format: 'json', data: html5 }, (err, res)->
+      throw err if err
+      if res.messages.length is 0
+        done()
+      else
+        console.log messages
+        throw new Error 'Invalid Html5 According to Validator'
+
+
+
 
 
