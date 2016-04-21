@@ -183,7 +183,7 @@ class CohtmlParser extends GenericParser
       node = new CohtmlTextNode parentNode, innerText
       node.preserveWhitespaceAndNewlines = true
 
-      @take @charset['newline']
+      @takeOrThrowError @charset['newline'], 'Expected newline'
 
       @backUp()
       childrenList = @extractScope (indentLevel + 1), node
@@ -204,7 +204,7 @@ class CohtmlParser extends GenericParser
 
       node = new CohtmlTextNode parentNode, innerText
 
-      @take @charset['newline']
+      @takeOrThrowError @charset['newline'], 'Expected newline'
 
       @backUp()
       childrenList = @extractScope (indentLevel + 1), node
