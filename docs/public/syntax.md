@@ -4,7 +4,7 @@
 
 ### Tags
 
-**rules**
+**Rules**
 
 * no angular braces
 * one tag per line
@@ -39,11 +39,11 @@ html lang="en"
 
 ### Attributes, ID and Class Shorthands
 
-**rules**
+**Rules**
 
 * attributes are written exactly like in html 
-* There is a shorthand for IDs. Anything after a dollar ($) sign is considered an ID.
-* There is a shorthand for Classes. Anything after a dot (.) sign is considered a class. Multiple classes are supported
+* There is a shorthand for IDs. Anything after a dollar ($) sign until a space is considered an ID.
+* There is a shorthand for Classes. Anything after a dot (.) sign until a space is considered a class. Multiple classes are supported
 
 **HTML**
 ```html
@@ -66,3 +66,46 @@ div.myclass1.myclass2.myclass3
 div style="color:red"
 div$myId.myclass1.myclass2 style="color:red"
 ```
+
+
+### Inner Text
+
+**Rules**
+
+* Anything after a tag and a pipe (|) and a single space sign is considered innertext. Pipe denoted inner texts are single line. Note that the single space after the pipe sign is required and does not appear in generated html.
+* Multiline inner texts can be inserted using backticks.
+* Standalone inner texts using backticks is supported.
+* Standalone triple backticks can be used to insert inner text that preserve newline and whitespace.
+
+**Cohtml**
+```
+p.class1 | Some text
+p.class1 `Line1
+Line2
+`
+p.class1
+  `line`
+  `line2`
+p.class1
+  `my name`
+  ` is`
+  b
+    `dan.`
+p.class1
+  `line1
+   line2`
+p.class1
+  ```line1
+   line2```
+```
+
+**HTML**
+```html
+<p class="class1">Some text</p>
+<p class="class1">Line1Line2</p>
+<p class="class1">my name is<b>dan</b></p>
+<p class="class1">Line1Line2</p>
+<p class="class1">Line1<br>&nbsp;&nbsp;&nbsp;Line2</p>
+
+```
+
