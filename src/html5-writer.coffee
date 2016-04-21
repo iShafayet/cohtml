@@ -1,5 +1,5 @@
 
-{ Html5Node, Html5TextNode } = require './html5-definition'
+{ Html5Node, Html5TextNode, Html5CommentNode } = require './html5-definition'
 
 class Html5Writer
 
@@ -73,6 +73,10 @@ class Html5Writer
     else if node instanceof Html5TextNode
 
       return node.innerText
+
+    else if node instanceof Html5CommentNode
+
+      return '<!-- ' + node.innerText + ' -->'
 
     else
 
