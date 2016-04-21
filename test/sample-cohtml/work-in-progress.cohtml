@@ -3,7 +3,17 @@
 html lang="en"
   head
     title | Cohtml Demo
+    ### Styles ###
     link rel="stylesheet" href="local.css"
+    style type="text/css" `
+      body {
+        background: black;
+      }
+    `
+    ### Scripts ###
+    script type="text/javascript" `
+      console.log('I\'m just a test');
+    `
   body
     h1 | Cohtml Demo
     p | lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
