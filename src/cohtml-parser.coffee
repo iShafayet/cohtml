@@ -57,6 +57,12 @@ class CohtmlParser extends GenericParser
     ex.stack = text
     throw ex
 
+  takeOrThrowError: (stringArray, message)->
+    if (char = @take stringArray)
+      return char
+    else
+      return @throwError message
+
   ###
     Utilities
   ###
@@ -133,8 +139,6 @@ class CohtmlParser extends GenericParser
 
       node = new CohtmlCommentNode parentNode, innerText
 
-      # @take @charset['newline']
-
       @backUp()
       childrenList = @extractScope (indentLevel + 1), node
       if childrenList.length isnt 0
@@ -154,7 +158,7 @@ class CohtmlParser extends GenericParser
 
       node = new CohtmlCommentNode parentNode, innerText
 
-      @take @charset['newline']
+      @takeOrThrowError @charset['newline'], 'Expected newline'
 
       @backUp()
       childrenList = @extractScope (indentLevel + 1), node
