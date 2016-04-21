@@ -7,7 +7,14 @@ class CohtmlToHtml5Converter
 
   constructor: ->
 
-  convert: (node, parentHtml5Node = null)->
+  convertScope: (scope)->
+    returnScope = []
+    for node in scope
+      returnNode = @convertNode node
+      returnScope.push returnNode
+    return returnScope
+
+  convertNode: (node, parentHtml5Node = null)->
     if node instanceof CohtmlNode
 
       attributeMap = {}
@@ -43,7 +50,7 @@ class CohtmlToHtml5Converter
 
     if node.childrenList
       for childNode in node.childrenList
-        childHtml5Node = @convert childNode, currentHtml5Node
+        childHtml5Node = @convertNode childNode, currentHtml5Node
 
     return currentHtml5Node
 

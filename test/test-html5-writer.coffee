@@ -23,13 +23,13 @@ describe 'Html5 Writer', ->
 
     converter = new CohtmlToHtml5Converter
 
-    html5Scope = converter.convert scope[0]
+    html5Scope = converter.convertScope scope
 
     # console.log (require 'util').inspect html5Scope, {depth:50, colors: true}
 
     writer = new Html5Writer
 
-    html5 = writer.write html5Scope
+    html5 = writer.writeScope html5Scope
 
     console.log html5
 

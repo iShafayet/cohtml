@@ -10,7 +10,14 @@ class Html5Writer
 
     @indentCharacter = indentCharacter or '  '
 
-  write: (node, indentLevel = 0)->
+  writeScope: (scope)->
+    returnScope = ''
+    for node in scope
+      returnNode = @writeNode node
+      returnScope += returnNode
+    return returnScope
+
+  writeNode: (node, indentLevel = 0)->
 
     padding = (@indentCharacter for _ in [0...indentLevel]).join ''
 
@@ -27,7 +34,7 @@ class Html5Writer
         html = '<' + signature + '>'
         if node.childrenList.length > 0
           for child in node.childrenList
-            html += @write child, (indentLevel + 0)
+            html += @writeNode child, (indentLevel + 0)
         return html
 
       if node.isSelfClosing
@@ -37,7 +44,7 @@ class Html5Writer
 
         if node.childrenList.length > 0
           for child in node.childrenList
-            html += @write child, (indentLevel + 1)
+            html += @writeNode child, (indentLevel + 1)
         else
           if node.innerText
             html += node.innerText
