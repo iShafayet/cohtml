@@ -20,6 +20,7 @@ class CohtmlParser extends GenericParser
       pipe: '|'
       backtick: '`'
       blockComment: '###'
+      singleLineComment: '#'
       newline: CohtmlParser.CommonTokens.newline
 
   ###
@@ -112,6 +113,8 @@ class CohtmlParser extends GenericParser
         return node
       else if node = @extractBlockCommentNode indentLevel, parentNode
         return node
+      else if node = @extractSingleLineCommentNode indentLevel, parentNode
+        return node
       else
         if @isEof()
           return false
@@ -120,6 +123,27 @@ class CohtmlParser extends GenericParser
     else
       if foundIndentLevel > indentLevel
         @throwError 'Unexpected indentation. Expected ' + indentLevel + ' indentations got ' + foundIndentLevel
+      return false
+
+  extractSingleLineCommentNode: (indentLevel, parentNode)->
+    if @take @charset['singleLineComment']
+      innerText = @takeAllUntil @charset['newline']
+      @take @charset['newline']
+      @ignoreWhitespace()
+
+      node = new CohtmlCommentNode parentNode, innerText
+
+      # @take @charset['newline']
+
+      @backUp()
+      childrenList = @extractScope (indentLevel + 1), node
+      if childrenList.length isnt 0
+        @rollback()
+        return @throwError 'CohtmlCommentNode can not contain children'
+      @commit()
+
+      return node
+    else
       return false
 
   extractBlockCommentNode: (indentLevel, parentNode)->

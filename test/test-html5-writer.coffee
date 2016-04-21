@@ -41,7 +41,7 @@ describe.only 'Html5 Writer', ->
 
     console.log html5
 
-  it 'Validation', (done)->
+  it.skip 'Validation', (done)->
 
     html5 = write()
 
