@@ -1,7 +1,7 @@
 {
   "name": "cohtml",
   "version": "0.0.0",
-  "description": "cohtml is to html what CoffeeScript is to Javascript.",
+  "description": "Cohtml is a declarative markup language with ruby/coffee-script like syntax that transpiles to and from Html.",
   "main": "index-runner.js",
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script/register"
@@ -15,7 +15,9 @@
     "preprocessor",
     "language",
     "utility",
-    "directive"
+    "transpile",
+    "coffee-script",
+    "ruby"
   ],
   "author": "Sayem Shafayet <ishafayet@gmail.com> (http://ishafayet.me/)",
   "license": "MIT",
