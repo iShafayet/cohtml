@@ -17,6 +17,53 @@ class Html5Writer
       returnScope += returnNode
     return returnScope
 
+  writeNode: (node, indentLevel = 0)->
+
+    if node instanceof Html5Node
+
+      signature = tag = '' + node.tag
+
+      for attribute, value of node.attributeMap
+        signature += ' ' + attribute
+        if value
+          signature += '="' + value + '"'
+
+      if node.isNonClosing
+        html = '<' + signature + '>'
+        if node.childrenList.length > 0
+          for child in node.childrenList
+            html += @writeNode child, (indentLevel + 0)
+        return html
+
+      if node.isSelfClosing
+        html = '<' + signature + ' />'
+      else
+        html = '<' + signature + '>'
+
+        if node.childrenList.length > 0
+          for child in node.childrenList
+            html += @writeNode child, (indentLevel + 1)
+        else
+          if node.innerText
+            html += node.innerText
+
+        html += '</' + tag + '>'
+
+      return html
+
+    else if node instanceof Html5TextNode
+
+      return node.innerText
+
+    else if node instanceof Html5CommentNode
+
+      return '<!-- ' + node.innerText + ' -->'
+
+    else
+
+      throw new Error 'Unsupported Node'
+
+
   writeNodePretty: (node, indentLevel = 0)->
 
     console.log '"cohtml".Html5Writer.writeNodePretty is deprecated. Please use third party html prettifiers.'
