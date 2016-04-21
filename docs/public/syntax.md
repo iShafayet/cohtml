@@ -75,9 +75,9 @@ div.myclass1 class="myclass2"
 **Rules**
 
 * Anything after a tag and a pipe (`|`) and a single space sign is considered innertext. Pipe denoted inner text is a single line inner text. Note that the single space after the pipe sign is required and does not appear in generated html.
-* Multiline inner texts can be inserted using backticks (`\``).
+* Multiline inner texts can be inserted using backticks.
 * Standalone inner texts using backticks is supported.
-* Standalone triple backticks (`\`\`\``) can be used to insert inner text that preserve newline and whitespace.
+* Standalone triple backticks can be used to insert inner text that preserve newline and whitespace.
 * Note that a tag can not contain both inner children and inline inner text. Use the standalone inner text instead.
 
 **Cohtml**
