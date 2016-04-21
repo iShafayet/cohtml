@@ -9,6 +9,8 @@
 
 { Seetoken } =  require 'seetoken'
 
+prettify = require 'pretty'
+
 validateHtml5 = require 'html-validator'
 
 fs = require 'fs'
@@ -38,6 +40,8 @@ describe.only 'Html5 Writer', ->
   it 'Work in progress', ->
 
     html5 = write()
+
+    html5 = prettify html5
 
     console.log html5
 
