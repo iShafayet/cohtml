@@ -19,6 +19,8 @@ class Html5Writer
 
   writeNodePretty: (node, indentLevel = 0)->
 
+    console.log '"cohtml".Html5Writer.writeNodePretty is deprecated. Please use third party html prettifiers.'
+
     padding = (@indentCharacter for _ in [0...indentLevel]).join ''
 
     if node instanceof Html5Node
