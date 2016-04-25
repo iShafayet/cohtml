@@ -23,6 +23,8 @@ class CohtmlParser extends GenericParser
       blockComment: '###'
       singleLineComment: '#'
       newline: CohtmlParser.CommonTokens.newline
+      braceStart: '('
+      braceEnd: ')'
 
   ###
     Error Management
@@ -256,6 +258,18 @@ class CohtmlParser extends GenericParser
       @ignoreWhitespace()
 
     @ignoreWhitespace()
+
+    if @take @charset['braceStart']
+      value = @takeAllUntil @charset['braceEnd']
+      @take @charset['braceEnd']
+      if 'style' of attributeMap
+        attributeMap['style'] += ';'
+      else
+        attributeMap['style'] = ''
+      attributeMap['style'] += value
+
+
+    @ignoreWhitespace()    
 
     innerText = null
     if @take @charset['pipe']
