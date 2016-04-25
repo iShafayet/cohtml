@@ -6,6 +6,9 @@ class GenericParser
     unless typeof inputString is 'string'
       throw new Error "Expected inputString to be a string"
 
+    unless inputString.length > 0
+      throw new Error "inputString can not be empty"
+
     @inputArray = inputString.split ''
     @head = 0
     @headStack = []
@@ -30,7 +33,7 @@ class GenericParser
     return @inputArray[@head]
 
   isEof: ->
-    return @head is @inputArray.length
+    return @head >= @inputArray.length
 
   moveForward: ->
     @head += 1

@@ -5,7 +5,7 @@
 
 fs = require 'fs'
 
-describe.only 'Html5 Parser', ->
+describe 'Html5 Parser', ->
 
   it 'Work in progress', ->
 
