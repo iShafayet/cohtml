@@ -3,19 +3,19 @@
 
 { Html5Node, Html5TextNode, Html5CommentNode, nonClosingHtml5TagList, selfClosingHtml5TagList } = require './html5-definition'
 
-class HtmlParser extends GenericParser
+class Html5Parser extends GenericParser
 
   constructor: (inputString, optionMap = {})->
     super inputString
     { indentCharacter } = optionMap
     @indentCharacter = indentCharacter or '  '
     @charset = 
-      tag: [].concat ['!'], HtmlParser.CommonTokens.urlSafeBase64
-      attribute: [].concat ['$', '?'], HtmlParser.CommonTokens.urlSafeBase64
+      tag: [].concat ['!'], Html5Parser.CommonTokens.urlSafeBase64
+      attribute: [].concat ['$', '?'], Html5Parser.CommonTokens.urlSafeBase64
       equal: '='
       dquote: '"'
-      newline: HtmlParser.CommonTokens.newline
-      whitespaceAndNewline: [].concat HtmlParser.CommonTokens.newline, HtmlParser.CommonTokens.whitespace
+      newline: Html5Parser.CommonTokens.newline
+      whitespaceAndNewline: [].concat Html5Parser.CommonTokens.newline, Html5Parser.CommonTokens.whitespace
       angularBraceStart: '<'
       angularBraceEnd: '>'
 
@@ -78,6 +78,8 @@ class HtmlParser extends GenericParser
     Extraction
   ###
 
+  extractScope: ->
+  	return ''
 
 
-@CohtmlParser = CohtmlParser
+@Html5Parser = Html5Parser

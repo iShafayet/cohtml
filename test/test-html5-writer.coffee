@@ -15,7 +15,7 @@ validateHtml5 = require 'html-validator'
 
 fs = require 'fs'
 
-describe.only 'Html5 Writer', ->
+describe 'Html5 Writer', ->
 
   write = ->
 
