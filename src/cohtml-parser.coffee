@@ -248,8 +248,9 @@ class CohtmlParser extends GenericParser
           value = @takeAllUntil @charset['dquote']
           attributeMap[attribute] = value
           @take @charset['dquote']
-          if value.length is 0
-            @throwError 'Value of an attribute can not be empty'
+          # NOTE: Probably an unnecessary check.
+          # if value.length is 0
+          #   @throwError 'Value of an attribute can not be empty'
         else
           @throwError 'Expected Double Quote after = sign'
 
