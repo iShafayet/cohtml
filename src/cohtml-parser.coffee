@@ -13,7 +13,7 @@ class CohtmlParser extends GenericParser
       tag: [].concat ['!'], CohtmlParser.CommonTokens.urlSafeBase64
       id: CohtmlParser.CommonTokens.urlSafeBase64
       class: CohtmlParser.CommonTokens.urlSafeBase64
-      attribute: CohtmlParser.CommonTokens.urlSafeBase64
+      attribute: [].concat ['$', '?'], CohtmlParser.CommonTokens.urlSafeBase64
       ws: CohtmlParser.CommonTokens.whitespace
       equal: '='
       dquote: '"'
