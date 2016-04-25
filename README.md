@@ -1,7 +1,7 @@
 # NOTICE!
 This project is under development and in no way is ready for production use. Use at your own risk.
 
-# cohtml
+# Cohtml
 Cohtml is a declarative markup language with ruby/coffee-script like syntax that transpiles to and from Html.
 
 ```
@@ -18,8 +18,19 @@ html lang="en"
       `alternative to html`
 ```
 
-# docs
+# Documentation
 
 [Documentation (Syntax, Api, Tools, Extensions)](docs/public)
 
 [Notes For Developers](docs/dev-notes)
+
+Common Tools & Extensions
+
+* [Sublime Text 3 Language Support](..)
+* [Atom Language Support](..)
+* [gulp Plugin](..)
+* [conveyance Plugin](..)
+
+# License
+
+[MIT License](LICENSE)
