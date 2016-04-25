@@ -14,6 +14,7 @@ class Html5Parser extends GenericParser
       attribute: [].concat ['$', '?'], Html5Parser.CommonTokens.urlSafeBase64
       equal: '='
       dquote: '"'
+      slash: '/'
       newline: Html5Parser.CommonTokens.newline
       whitespaceAndNewline: [].concat Html5Parser.CommonTokens.newline, Html5Parser.CommonTokens.whitespace
       angularBraceStart: '<'
@@ -78,8 +79,98 @@ class Html5Parser extends GenericParser
     Extraction
   ###
 
-  extractScope: ->
-  	return ''
+  extractScope: (parentNode = null)->
+    scope = []
+    while node = @extractStatement parentNode
+      scope.push node
+    return scope
+
+  extractStatement: (parentNode)->
+
+    @ignoreWhitespaceAndNewline()
+
+    if node = @extractNode parentNode
+      return node
+
+    else
+      return false
+
+  extractNode: (parentNode)->
+
+    return false unless @take @charset['angularBraceStart']
+
+    @ignoreWhitespaceAndNewline()
+    tag = @takeAllUntil ([].concat @charset['whitespaceAndNewline'], @charset['angularBraceEnd'])
+
+    @ignoreWhitespaceAndNewline()
+    attributeMap = {}
+    while attribute = @takeAll @charset['attribute']
+
+      @ignoreWhitespaceAndNewline()
+      if @take @charset['equal']
+
+        @ignoreWhitespaceAndNewline()
+        if @take @charset['dquote']
+          value = @takeAllUntil @charset['dquote']
+          attributeMap[attribute] = value
+          @take @charset['dquote']
+        else
+          @throwError 'Expected Double Quote after = sign'
+
+      else
+        attributeMap[attribute] = null
+      @ignoreWhitespaceAndNewline()
+
+    @ignoreWhitespaceAndNewline()
+    node = new Html5Node parentNode, tag, attributeMap
+
+    console.log node
+
+    if tag in nonClosingHtml5TagList
+      unless @take @charset['angularBraceEnd']
+        @throwError 'Expected > at the end of non-closing tag ' + tag
+      node.isNonClosing = true
+      return node
+
+    if @take @charset['slash']
+      @ignoreWhitespaceAndNewline()
+      unless @take @charset['angularBraceEnd']
+        @throwError 'Expected > at the end of self closing tag' + tag + ' after /'
+      node.isSelfClosing = true
+      return node
+
+    if tag in selfClosingHtml5TagList
+      unless @take @charset['angularBraceEnd']
+        @throwError 'Expected > at the end of tag ' + tag
+      node.isSelfClosing = true
+      return node
+
+    unless @take @charset['angularBraceEnd']
+      @throwError 'Expected > at the end of tag ' + tag
+
+    node.childrenList = @extractScope node
+
+    @ignoreWhitespaceAndNewline()
+
+    unless @take @charset['angularBraceStart']
+      @throwError 'Expected <'
+
+    @ignoreWhitespaceAndNewline()
+
+    unless @take @charset['slash']
+      @throwError 'Expected /'
+
+    @ignoreWhitespaceAndNewline()
+
+    unless @take tag
+      @throwError 'Expected ' + tag
+
+    @ignoreWhitespaceAndNewline()
+
+    unless @take @charset['angularBraceEnd']
+      @throwError 'Expected >'
+
+    return node
 
 
 @Html5Parser = Html5Parser
