@@ -19,6 +19,8 @@ class Html5Parser extends GenericParser
       whitespaceAndNewline: [].concat Html5Parser.CommonTokens.newline, Html5Parser.CommonTokens.whitespace
       angularBraceStart: '<'
       angularBraceEnd: '>'
+      commentStart: '<!--'
+      commentEnd: '-->'
 
   ###
     Error Management
@@ -89,9 +91,28 @@ class Html5Parser extends GenericParser
 
     @ignoreWhitespaceAndNewline()
 
-    if node = @extractNode parentNode
+    if node = @extractCommentNode parentNode
       return node
+    else if node = @extractNode parentNode
+      return node
+    else if node = @extractTextNode parentNode
+      return node
+    else
+      return false
 
+  extractCommentNode: (parentNode)->
+    if attribute = @takeAll @charset['commentStart']
+      value = @takeAllUntil @charset['commentEnd']
+      node = new Html5CommentNode parentNode, value
+      return node
+    else
+      return false
+
+  extractTextNode: (parentNode)->
+    value = @takeAllUntil @charset['angularBraceStart']
+    if value.length > 0
+      node = new Html5TextNode parentNode, value
+      return node
     else
       return false
 
@@ -123,8 +144,6 @@ class Html5Parser extends GenericParser
 
     @ignoreWhitespaceAndNewline()
     node = new Html5Node parentNode, tag, attributeMap
-
-    console.log node
 
     if tag in nonClosingHtml5TagList
       unless @take @charset['angularBraceEnd']
