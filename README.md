@@ -10,10 +10,10 @@ html lang="en"
   head
     title | Cohtml Demo
   body (margin:0px)
-    h1 | Cohtml Demo
+    h1$myTitle.heading | Cohtml Demo
     img src="logo.png" (height:24px;width:24px;)
-    p
-      `Cohtml is a `
+    p.info
+      `Cohtml is an `
       b | excellent
       `alternative to html`
 ```
