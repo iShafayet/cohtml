@@ -18,6 +18,10 @@ html lang="en"
       `alternative to html`
 ```
 
+# Try Online
+
+[cohtml.xyz](https://cohtml.xyz/try-online) (Coming Soon) Convert any html to cohtml and vice-versa without breaking a sweat.
+
 # Documentation
 
 [Documentation (Syntax, Api, Tools, Extensions)](docs/public)
@@ -26,11 +30,12 @@ html lang="en"
 
 Common Tools & Extensions
 
-* [Sublime Text 3 Language Support](..)
-* [Atom Language Support](..)
-* [gulp Plugin](..)
-* [conveyance Plugin](..)
+* [Sublime Text 3 Language Support](..) (Coming Soon)
+* [Atom Language Support](..) (Coming Soon)
+* [gulp Plugin](..) (Coming Soon) 
+* [conveyance Plugin](..) (Coming Soon)
 
 # License
 
 [MIT License](LICENSE)
+
