@@ -33,6 +33,56 @@ describe.only 'GenericParser', ->
       parser.head = 4
       expect(parser.isEof()).to.equal(true)
 
+    it 'expect it to return false if end of file is not reached', ->
+      parser = new GenericParser '123'
+      parser.head = 2
+      expect(parser.isEof()).to.equal(false)
+
+  describe '#moveForward', ->
+
+    it 'expect it to increment the head', ->
+      parser = new GenericParser '123'
+      fn = -> parser.moveForward()
+      expect(fn).to.increase(parser, 'head')
+      expect(parser.head).to.equal(1)
+
+    it 'expect it to return true if not isEof', ->
+      parser = new GenericParser '1'
+      ret = parser.moveForward()
+      expect(ret).to.equal(true)
+
+    it 'expect it to return false if isEof', ->
+      parser = new GenericParser '1'
+      ret = parser.moveForward()
+      ret = parser.moveForward()
+      expect(ret).to.equal(false)
+
+  describe '#backUp, #commit, #rollback', ->
+
+    it 'combined use case scenario', ->
+
+      parser = new GenericParser '123'
+
+      parser.backUp()
+      expect(parser.head).to.equal(0)
+
+      parser.moveForward()
+      expect(parser.head).to.equal(1)
+
+      parser.rollback()
+      expect(parser.head).to.equal(0)
+
+      parser.moveForward()
+      expect(parser.head).to.equal(1)
+
+      parser.backUp()
+
+      parser.moveForward()
+      expect(parser.head).to.equal(2)
+
+      parser.commit()
+      expect(parser.head).to.equal(2)
+
 
 
 

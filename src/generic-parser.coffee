@@ -36,8 +36,9 @@ class GenericParser
     return @head >= @inputArray.length
 
   moveForward: ->
+    return false if @isEof()
     @head += 1
-    return
+    return true
 
   ###
     Utilities
