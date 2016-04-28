@@ -9,7 +9,7 @@
 * no angular braces
 * one tag per line
 * no closing tags, indentation based scope.
-* children have one extra indentation than his parents.
+* children have one extra indentation than their parent.
 
 **HTML**
 ```html
@@ -133,3 +133,11 @@ div style="color:blue;" (color:red;)
 <div id="myId" class="myclass1 myclass2" some-attribute="someValue" style="color: red"></div>
 <div style="color:blue;color:red;"></div>
 ```
+
+
+### Full Syntax Showcase
+
+[This File](full-syntax-showcase) contains a demo `cohtml` document that showcases all features of the cohtml language. Great for quick reference.
+
+
+
