@@ -112,3 +112,24 @@ p.class1
 
 ```
 
+### Shorthand for inline styles
+
+**Rules**
+
+* Inline styles can be written using braces `(` `)`. There can be only one inline style for an element. The braces must be written *after* any other attributes and *before* any inner text.
+* If using both the `style` attribute and shorthand, the content inside the braces will be appended at the end.
+**Cohtml**
+```
+div (color:red;)
+div (color:red;) | inner text here
+div$myId.myclass1.myclass2 some-attribute="someValue" (color:red;)
+div style="color:blue;" (color:red;)
+```
+
+**HTML**
+```html
+<div style="color:red;"></div>
+<div style="color:red;">inner text here</div>
+<div id="myId" class="myclass1 myclass2" some-attribute="someValue" style="color: red"></div>
+<div style="color:blue;color:red;"></div>
+```
