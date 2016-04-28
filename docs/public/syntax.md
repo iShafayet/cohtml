@@ -137,7 +137,7 @@ div style="color:blue;" (color:red;)
 
 ### Full Syntax Showcase
 
-[This File](full-syntax-showcase) contains a demo `cohtml` document that showcases all features of the cohtml language. Great for quick reference.
+[This File](full-syntax-showcase.md) contains a demo `cohtml` document that showcases all features of the cohtml language. Great for quick reference.
 
 
 
