@@ -12,7 +12,7 @@ html lang="en"
       }
     `
   body
-    h1 | Hello World
+    h1$title | Hello World
     div.container
       img src="myimage.png"
       p `lorem ipsum.`
