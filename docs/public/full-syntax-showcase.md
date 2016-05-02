@@ -1,7 +1,7 @@
 
 **Cohtml**
 
-```
+```coffee-script
 !doctype html
 html lang="en"
   head
