@@ -23,7 +23,7 @@ html lang="en"
 
 **html**
 
-```
+```html
 <!doctype html>
 <html lang="en">
   <head>
