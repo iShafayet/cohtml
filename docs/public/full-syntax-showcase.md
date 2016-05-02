@@ -24,7 +24,26 @@ html lang="en"
 **html**
 
 ```
-coming soon..
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Hello World</title>
+    <style type="text/css">
+      .container {
+        background: #cccccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="title">Hello World</h1>
+    <div class="container">
+      <img src="myimage.png" />
+      <p>lorem ipsum.</p>
+    <script type="text/javascript">
+      console.log('hello world.');
+    </script>
+  </body>
+</html>
 ```
 
 
