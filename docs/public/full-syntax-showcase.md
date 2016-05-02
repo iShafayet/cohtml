@@ -39,6 +39,7 @@ html lang="en"
     <div class="container">
       <img src="myimage.png" />
       <p>lorem ipsum.</p>
+    </div>
     <script type="text/javascript">
       console.log('hello world.');
     </script>
