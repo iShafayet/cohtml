@@ -4,7 +4,7 @@ This project is under development and in no way is ready for production use. Use
 # Cohtml
 Cohtml is a declarative markup language with ruby/coffee-script like syntax that transpiles to and from Html.
 
-```
+```coffee-script
 !doctype html
 html lang="en"
   head
