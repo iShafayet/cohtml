@@ -26,3 +26,13 @@ describe.only 'Scenario Based Tests', ->
     html5 = writer.writeScope html5Scope
     return html5
 
+  it 'Scenario 1. Describe...', ->
+
+    input = fs.readFileSync './test/scenarios/scenario-1-input.cohtml', 'utf8'
+    # console.log input
+    output = toHtml5 input
+    # console.log output
+    expectedOutput = fs.readFileSync './test/scenarios/scenario-1-expected.html', 'utf8'
+    # console.log expectedOutput
+    expect(output).to.equal(expectedOutput)
+    
