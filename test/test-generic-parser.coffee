@@ -3,7 +3,7 @@
 
 { GenericParser } = require './../src/generic-parser'
 
-describe.only 'GenericParser', ->
+describe 'GenericParser', ->
 
   describe 'constuctor', ->
 
