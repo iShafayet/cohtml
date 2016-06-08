@@ -21,5 +21,5 @@ describe 'Cohtml To Html5 Converter', ->
 
     html5Scope = converter.convertScope scope
 
-    console.log (require 'util').inspect html5Scope, {depth:50, colors: true}
+    # console.log (require 'util').inspect html5Scope, {depth:50, colors: true}
 
