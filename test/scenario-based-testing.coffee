@@ -135,3 +135,13 @@ describe.only 'Scenario Based Tests', ->
     expectedOutput = fs.readFileSync './test/scenarios/scenario-11-expected.html', 'utf8'
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
+
+  it 'Scenario 12. Attribute with two space at the last of every attribute', ->
+
+    input = fs.readFileSync './test/scenarios/scenario-12-input.cohtml', 'utf8'
+    # console.log input
+    output = toHtml5 input
+    # console.log output
+    expectedOutput = fs.readFileSync './test/scenarios/scenario-12-expected.html', 'utf8'
+    # console.log expectedOutput
+    expect(output).to.equal(expectedOutput)
