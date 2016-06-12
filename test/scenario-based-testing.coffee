@@ -76,7 +76,7 @@ describe.only 'Scenario Based Tests', ->
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
 
-  it 'Scenario 6. link adding  ', ->
+  it 'Scenario 6. Link adding  ', ->
 
     input = fs.readFileSync './test/scenarios/scenario-6-input.cohtml', 'utf8'
     # console.log input
@@ -86,7 +86,7 @@ describe.only 'Scenario Based Tests', ->
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
 
-  it 'Scenario 7. attribute with a space at the first ', ->
+  it 'Scenario 7. Attribute with a space at the first ', ->
 
     input = fs.readFileSync './test/scenarios/scenario-7-input.cohtml', 'utf8'
     # console.log input
@@ -96,7 +96,7 @@ describe.only 'Scenario Based Tests', ->
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
 
-  it 'Scenario 8. two attribute with a space at the second ', ->
+  it 'Scenario 8. Two attribute with a space at the second ', ->
 
     input = fs.readFileSync './test/scenarios/scenario-8-input.cohtml', 'utf8'
     # console.log input
@@ -106,3 +106,12 @@ describe.only 'Scenario Based Tests', ->
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
 
+  it 'Scenario 9. Two attribute with two space ', ->
+
+    input = fs.readFileSync './test/scenarios/scenario-9-input.cohtml', 'utf8'
+    # console.log input
+    output = toHtml5 input
+    # console.log output
+    expectedOutput = fs.readFileSync './test/scenarios/scenario-9-expected.html', 'utf8'
+    # console.log expectedOutput
+    expect(output).to.equal(expectedOutput)
