@@ -436,7 +436,7 @@ describe.only 'Scenario Based Tests', ->
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
 
-  it 'Scenario 42. Two tags with two attribute, a space at the beginning and end of the se attribute', ->
+  it 'Scenario 42. Two tags with two attribute, a space at the beginning and end of the second attribute', ->
 
     input = fs.readFileSync './test/scenarios/scenario-42-input.cohtml', 'utf8'
     # console.log input
