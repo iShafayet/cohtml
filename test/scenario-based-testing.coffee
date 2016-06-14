@@ -206,7 +206,7 @@ describe.only 'Scenario Based Tests', ->
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
 
-  it 'Scenario 19. ', ->
+  it 'Scenario 19. Two attribute in the parent tag', ->
 
     input = fs.readFileSync './test/scenarios/scenario-19-input.cohtml', 'utf8'
     # console.log input
