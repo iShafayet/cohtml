@@ -176,7 +176,7 @@ describe.only 'Scenario Based Tests', ->
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
 
-  it 'Scenario 16. Double tag', ->
+  it 'Scenario 16. child and parent', ->
 
     input = fs.readFileSync './test/scenarios/scenario-16-input.cohtml', 'utf8'
     # console.log input
@@ -185,3 +185,5 @@ describe.only 'Scenario Based Tests', ->
     expectedOutput = fs.readFileSync './test/scenarios/scenario-16-expected.html', 'utf8'
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
+
+
