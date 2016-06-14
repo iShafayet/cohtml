@@ -275,3 +275,13 @@ describe.only 'Scenario Based Tests', ->
     expectedOutput = fs.readFileSync './test/scenarios/scenario-25-expected.html', 'utf8'
     # console.log expectedOutput
     expect(output).to.equal(expectedOutput)
+
+  it 'Scenario 26. one attribute in the child tag with space at the beginning and at the end', ->
+
+    input = fs.readFileSync './test/scenarios/scenario-26-input.cohtml', 'utf8'
+    # console.log input
+    output = toHtml5 input
+    # console.log output
+    expectedOutput = fs.readFileSync './test/scenarios/scenario-26-expected.html', 'utf8'
+    # console.log expectedOutput
+    expect(output).to.equal(expectedOutput)
